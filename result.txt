@@ -1,0 +1,73 @@
+                 /----- 9
+         /----- 8
+ /----- 7
+ |       |       /----- 6
+ |       \----- 5
+4
+ \----- 3
+         |       /----- 2
+         \----- 1
+# of nodes:9
+
+Inorder traversal:
+123456789
+after remove 3:
+                 /----- 9
+         /----- 8
+ /----- 7
+ |       |       /----- 6
+ |       \----- 5
+4
+ |       /----- 2
+ \----- 1
+# of nodes:8
+
+after remove 5:
+                 /----- 9
+         /----- 8
+ /----- 7
+ |       \----- 6
+4
+ \----- 3
+         |       /----- 2
+         \----- 1
+# of nodes:8
+
+after remove 7:
+         /----- 9
+ /----- 8
+ |       |       /----- 6
+ |       \----- 5
+4
+ \----- 3
+         |       /----- 2
+         \----- 1
+# of nodes:8
+
+test: find(5)
+expect:	5
+got:	5
+test: find(3)
+expect:	3
+got:	3
+test: find(4)
+expect:	4
+got:	4
+test: find(9)
+expect:	null
+got:	9
+
+I think there might be an error in the last testcase for find
+
+
+Questions for removeElement:
+If the node has no children, no replacement is needed
+If the node has only a left child, use the left child as the replacement
+If the node has only a right child, use the right child as the replacement
+If the node has two children, it uses the inorder successor (the smallest element in the right subtree) as the replacement. This is found by going to the right child once 5hen going left as far as possible to find the smallest value
+
+Another reasonable choice would be to use the inorder predecessor, the largest element in the left subtree, as the replacement. This would be implemented by going to the left child once then going right as far as possible to find the largest value
+
+
+In the GitHub, it didn't specify whether I should do the removeMax or the findMin and findMax, but I did them anyway because it had the comment     
+// To be completed as a Programming Project

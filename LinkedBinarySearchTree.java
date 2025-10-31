@@ -80,8 +80,23 @@ public class LinkedBinarySearchTree<T extends Comparable<T>> extends LinkedBinar
    * @throws ElementNotFoundException if the element is not in the tree
    */
   public T find(T targetElement) throws ElementNotFoundException{
-    // To be completed as a Programming Project
-    return null;
+		if (isEmpty()) {
+      throw new ElementNotFoundException("LinkedBinarySearchTree");
+    }
+    BinaryTreeNode<T> current = root;
+
+    while (current != null) {
+      int comparison = ((Comparable<T>) targetElement).compareTo(current.getElement());
+
+      if (comparison == 0) {
+        return current.getElement();
+      } else if (comparison < 0) {
+        current = current.getLeft();
+      } else {
+        current = current.getRight();
+      }
+    }
+    throw new ElementNotFoundException("Element not found");
   }
 
   /**
@@ -249,8 +264,26 @@ public class LinkedBinarySearchTree<T extends Comparable<T>> extends LinkedBinar
    * @throws EmptyCollectionException if the tree is empty
    */
   public T removeMax() throws EmptyCollectionException{
-    // To be completed as a Programming Project
-    return null;
+		T result = null;
+
+    if (isEmpty()) {
+      throw new EmptyCollectionException("LinkedBinarySearchTree");
+    } else {
+      if (root.right == null) {
+        result = root.element;
+        root = root.left;
+      } else {
+        BinaryTreeNode<T> parent = root;
+        BinaryTreeNode<T> current = root.right;
+        while (current.right != null) {
+          parent = current;
+          current = current.right;
+        }
+        result = current.element;
+        parent.right = current.left;
+      }
+    }
+    return result;
   }
 
   /**
@@ -262,8 +295,15 @@ public class LinkedBinarySearchTree<T extends Comparable<T>> extends LinkedBinar
    * @throws EmptyCollectionException if the tree is empty
    */
   public T findMin() throws EmptyCollectionException{
-    // To be completed as a Programming Project
-    return null;
+		if (isEmpty()) {
+      throw new EmptyCollectionException("LinkedBinarySearchTree");
+    }
+
+    BinaryTreeNode<T> current = root;
+    while (current.left != null) {
+      current = current.left;
+    }
+    return current.element;
   }
 
   /**
@@ -276,7 +316,14 @@ public class LinkedBinarySearchTree<T extends Comparable<T>> extends LinkedBinar
    * @throws EmptyCollectionException if the tree is empty
    */
   public T findMax() throws EmptyCollectionException{
-    // To be completed as a Programming Project
-    return null;
+		if (isEmpty()) {
+      throw new EmptyCollectionException("LinkedBinarySearchTree");
+    }
+
+    BinaryTreeNode<T> current = root;
+    while (current.right != null) {
+      current = current.right;
+    }
+    return current.element;
   }
 }
